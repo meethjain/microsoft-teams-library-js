@@ -372,7 +372,6 @@ describe('media', () => {
             expect(mediaAttachment.size).not.toBeNull();
             expect(typeof mediaAttachment.size === 'number').toBeTruthy();
             expect(mediaAttachment.getMedia).toBeDefined();
-            done();
           });
 
           const message = mobilePlatformMock.findMessageByFunc('selectMedia');
