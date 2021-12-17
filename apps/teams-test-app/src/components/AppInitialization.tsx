@@ -56,8 +56,11 @@ const NotifyExpectedFailure = (): React.ReactElement =>
           return;
         }
         const acceptableValues = Object.values(app.ExpectedFailureReason);
-        if (!input.reason && !acceptableValues.includes(input.reason)) {
+        if (input.reason && !acceptableValues.includes(input.reason)) {
           throw new Error(`input must be one of: ${JSON.stringify(acceptableValues)}`);
+        }
+        if (!input.reason) {
+          input.reason = app.ExpectedFailureReason.Other;
         }
       },
       submit: async input => {
