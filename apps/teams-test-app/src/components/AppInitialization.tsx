@@ -55,7 +55,7 @@ const NotifyExpectedFailure = (): React.ReactElement =>
           input.reason = app.ExpectedFailureReason.Other;
         }
         const acceptableValues = Object.values(app.ExpectedFailureReason);
-        if (input.reason && !acceptableValues.includes(input.reason)) {
+        if (!acceptableValues.includes(input.reason)) {
           throw new Error(`input must be one of: ${JSON.stringify(acceptableValues)}`);
         }
       },
