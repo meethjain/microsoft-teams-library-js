@@ -7,8 +7,9 @@ import {
   sendMessageEventToChild,
   sendMessageToParent,
 } from '../internal/communication';
+import { requestFocusAPISupportVersion } from '../internal/constants';
 import { registerHandler, registerHandlerHelper } from '../internal/handlers';
-import { ensureInitialized } from '../internal/internalAPIs';
+import { ensureInitialized, throwExceptionIfMobileApiIsNotSupported } from '../internal/internalAPIs';
 import { ApiName, ApiVersionNumber, getApiVersionTag } from '../internal/telemetry';
 import { isNullOrUndefined } from '../internal/typeCheckUtilities';
 import { createTeamsAppLink } from '../internal/utils';
@@ -291,6 +292,36 @@ export namespace pages {
         }
       },
     );
+  }
+
+  /**
+   * Parameters for the requestFocus API
+   */
+  export interface RequestFocusParams {
+    id: string;
+  }
+
+  /**
+   * @hidden
+   * Requests focus from the host onto an element within the web application. 
+   * If params are empty the focus will be moved to the parent WebView.
+   * This api is currently only supported for mobile & is a no-op on desktop.
+   *
+   * @internal
+   * Limited to Microsoft-internal use.
+   * 
+   * @param params - Parameters for the requestFocus call.
+   */
+  export function requestFocus(params?: RequestFocusParams): void {
+    ensureInitialized(runtime);
+    if (!pages.isSupported()) {
+      throw errorNotSupportedOnPlatform;
+    }
+
+    throwExceptionIfMobileApiIsNotSupported(requestFocusAPISupportVersion);
+    
+    const apiVersionTag = getApiVersionTag(pagesTelemetryVersionNumber, ApiName.Pages_RequestFocus);
+    sendMessageToParent(apiVersionTag, 'requestFocus', [params]);
   }
 
   /**

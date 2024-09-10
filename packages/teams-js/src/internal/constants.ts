@@ -13,6 +13,15 @@ export const defaultSDKVersionForCompatCheck = '2.0.1';
 
 /**
  * @hidden
+ * This is the client version when requestFocus APIs are supported on mobile.
+ *
+ * @internal
+ * Limited to Microsoft-internal use
+ */
+export const requestFocusAPISupportVersion = '2.0.9';
+
+/**
+ * @hidden
  * This is the client version when selectMedia API - VideoAndImage is supported on mobile.
  *
  * @internal

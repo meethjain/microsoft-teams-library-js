@@ -240,6 +240,7 @@ export const enum ApiName {
   Pages_RemoveEvent_NotifyFailure = 'pages.removeEvent.notifyFailure',
   Pages_RemoveEvent_NotifySuccess = 'pages.removeEvent.notifySuccess',
   Pages_ReturnFocus = 'pages.returnFocus',
+  Pages_RequestFocus = 'pages.requestFocus',
   Pages_SaveEvent_NotifyFailure = 'pages.saveEvent.notifyFailure',
   Pages_SaveEvent_NotifySuccess = 'pages.saveEvent.notifySuccess',
   Pages_SetCurrentFrame = 'pages.setCurrentFrame',
